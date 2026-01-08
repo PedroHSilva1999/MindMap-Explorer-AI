@@ -6,6 +6,7 @@ Aplicação web moderna que gera mapas mentais interativos para qualquer tecnolo
 
 <img width="1454" height="704" alt="image" src="https://github.com/user-attachments/assets/412e2839-1573-4ea1-be70-2628d6f9f101" />
 
+<img width="1847" height="743" alt="image" src="https://github.com/user-attachments/assets/f0997e25-05b0-4e83-83ac-8112e2aee40e" />
 
 
 ## Visão Geral
