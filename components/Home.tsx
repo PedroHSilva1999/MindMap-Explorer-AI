@@ -47,9 +47,9 @@ export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
                     <Sparkles className="text-green-500 w-12 h-12" />
                 </div>
                 <h1 className="text-5xl font-black text-white tracking-tighter">
-                    IA <span className="text-green-500">Explorer</span>
+                    <span className="text-green-500">MindMap</span> Explorer <span className="text-blue-400">AI</span>
                 </h1>
-                <p className="text-slate-400 text-lg">Gere mapas mentais dinâmicos para qualquer tecnologia</p>
+                <p className="text-slate-400 text-lg">Gere mapas mentais dinâmicos para qualquer tecnologia com inteligência artificial</p>
 
                 <form onSubmit={handleSubmit} className="relative group mt-8">
                     <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
@@ -81,7 +81,7 @@ export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
                             <span>{category}</span>
                         </div>
                         <div className="grid gap-3">
-                            {categoryTopics.map((topic) => (
+                            {(categoryTopics as Topic[]).map((topic) => (
                                 <button
                                     key={topic.id}
                                     onClick={() => onSelectTopic(topic)}

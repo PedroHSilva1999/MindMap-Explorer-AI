@@ -1,4 +1,4 @@
-# IA Explorer - Gerador Universal de Mapas Mentais
+# MindMap Explorer AI - Gerador Universal de Mapas Mentais
 
 Aplicação web moderna que gera mapas mentais interativos para qualquer tecnologia ou conceito usando inteligência artificial. Explore, aprenda e visualize estruturas hierárquicas de conhecimento de forma intuitiva e visual.
 
@@ -9,7 +9,7 @@ Aplicação web moderna que gera mapas mentais interativos para qualquer tecnolo
 
 ## Visão Geral
 
-IA Explorer é uma plataforma de aprendizado interativa que permite explorar qualquer tecnologia, framework ou conceito através de mapas mentais gerados por inteligência artificial. A aplicação combina uma interface moderna estilo Google com visualizações hierárquicas interativas, permitindo que desenvolvedores e estudantes explorem estruturas complexas de conhecimento de forma intuitiva.
+MindMap Explorer AI é uma plataforma de aprendizado interativa que permite explorar qualquer tecnologia, framework ou conceito através de mapas mentais gerados por inteligência artificial. A aplicação combina uma interface moderna estilo Google com visualizações hierárquicas interativas, permitindo que desenvolvedores e estudantes explorem estruturas complexas de conhecimento de forma intuitiva.
 
 O projeto vem pré-configurado com um mapa mental completo do Spring Framework, mas pode gerar mapas mentais dinâmicos para qualquer tecnologia que você pesquisar.
 
@@ -46,7 +46,7 @@ O projeto vem pré-configurado com um mapa mental completo do Spring Framework, 
 1. Clone o repositório:
 ```bash
 git clone <url-do-repositorio>
-cd spring-annotations-interactive-map
+cd mindmap-explorer-ai
 ```
 
 2. Instale as dependências:
@@ -75,7 +75,7 @@ A aplicação estará disponível em `http://localhost:4000`
 ## Estrutura do Projeto
 
 ```
-spring-annotations-interactive-map/
+mindmap-explorer-ai/
 ├── components/
 │   ├── AnnotationDetails.tsx    # Painel lateral com detalhes de nós
 │   ├── Guide.tsx                 # Modal com guia de uso

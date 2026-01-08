@@ -138,7 +138,7 @@ const App: React.FC = () => {
 
       <footer className="h-8 bg-slate-900 border-t border-slate-800 flex items-center justify-between px-6 text-[10px] text-slate-500">
         <div className="flex items-center space-x-4">
-          <span>v4.0.0 Explorer Edition</span>
+          <span>MindMap Explorer AI v1.0.0</span>
           <span className="flex items-center space-x-1">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <span>Cérebro IA Online</span>
