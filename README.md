@@ -4,7 +4,8 @@ Atlas interativo e visual das anotações do Spring Framework, combinando visual
 
 ## Preview
 
-![Spring Annotations Interactive Map](screenshot.png)
+<img width="1899" height="646" alt="image" src="https://github.com/user-attachments/assets/2fce13c6-f841-4e5e-b1a8-6592d008fa22" />
+
 
 ## Visão Geral
 
