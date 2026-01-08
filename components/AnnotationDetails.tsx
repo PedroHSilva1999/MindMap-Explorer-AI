@@ -43,7 +43,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
     <div className="fixed right-0 top-0 h-full w-full md:w-[450px] bg-slate-900 border-l border-slate-700 shadow-2xl z-50 overflow-y-auto transform transition-transform duration-300 animate-in slide-in-from-right">
       <div className="sticky top-0 bg-slate-900/90 backdrop-blur p-6 border-b border-slate-700 flex justify-between items-center z-10">
         <h2 className="text-2xl font-bold text-teal-400 font-mono">{annotationName}</h2>
-        <button 
+        <button
           onClick={onClose}
           className="p-2 hover:bg-slate-800 rounded-full transition-colors"
         >
@@ -55,7 +55,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <Loader2 className="animate-spin text-teal-500" size={48} />
-            <p className="text-slate-400 font-medium">Consultando IA sobre Spring...</p>
+            <p className="text-slate-400 font-medium">Consultando IA...</p>
           </div>
         ) : error ? (
           <div className="bg-red-900/20 border border-red-500/50 p-4 rounded-lg text-red-200">

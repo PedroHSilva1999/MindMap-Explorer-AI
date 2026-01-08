@@ -5,15 +5,16 @@ import { SPRING_DATA } from '../constants';
 import { AnnotationNode } from '../types';
 
 interface Props {
+  data: AnnotationNode;
   onNodeClick: (name: string) => void;
 }
 
-export const MindMap: React.FC<Props> = ({ onNodeClick }) => {
+export const MindMap: React.FC<Props> = ({ data, onNodeClick }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!svgRef.current || !containerRef.current) return;
+    if (!svgRef.current || !containerRef.current || !data) return;
 
     d3.select(svgRef.current).selectAll("*").remove();
 
@@ -38,7 +39,7 @@ export const MindMap: React.FC<Props> = ({ onNodeClick }) => {
       .size([height - 100, width - 300])
       .separation((a, b) => (a.parent === b.parent ? 1.2 : 2));
 
-    const root = d3.hierarchy(SPRING_DATA);
+    const root = d3.hierarchy(data);
     treeLayout(root);
 
     svg.call(zoom.transform, d3.zoomIdentity.translate(150, 50).scale(0.9));
@@ -106,14 +107,14 @@ export const MindMap: React.FC<Props> = ({ onNodeClick }) => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [onNodeClick]);
+  }, [onNodeClick, data]);
 
   return (
     <div ref={containerRef} className="w-full h-full relative">
       <svg ref={svgRef} className="w-full h-full"></svg>
       <div className="absolute bottom-6 left-6 pointer-events-none text-slate-500 text-xs italic space-y-1">
-        <p>• Click on leaf nodes (annotations) to see AI details</p>
-        <p>• Pan to move, scroll to zoom</p>
+        <p>• Clique em qualquer nó para ver detalhes da IA</p>
+        <p>• Arraste para mover, scroll para zoom</p>
       </div>
     </div>
   );
