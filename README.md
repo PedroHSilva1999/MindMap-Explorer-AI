@@ -4,7 +4,8 @@ Aplicação web moderna que gera mapas mentais interativos para qualquer tecnolo
 
 ## Preview
 
-![Spring Annotations Interactive Map](screenshot.png)
+<img width="1899" height="646" alt="image" src="https://github.com/user-attachments/assets/2fce13c6-f841-4e5e-b1a8-6592d008fa22" />
+
 
 ## Visão Geral
 
@@ -144,18 +145,4 @@ O projeto vem com o Spring Framework já configurado como exemplo, incluindo:
 - **Core/Context**: Configuração do contexto da aplicação
 - **Web**: Anotações para desenvolvimento de APIs REST
 
-No entanto, você pode gerar mapas mentais para qualquer tecnologia ou conceito pesquisando na barra principal.
-
-## Exemplos de Tecnologias que Você Pode Explorar
-
-- Frameworks: React, Vue.js, Angular, Spring Boot, Django, Flask
-- Ferramentas: Docker, Kubernetes, Git, AWS, Terraform
-- Linguagens: Python, JavaScript, TypeScript, Java, Go
-- Conceitos: REST APIs, Microservices, Design Patterns, Testes
-- E muito mais! A IA se adapta ao contexto da tecnologia pesquisada.
-
-## Notas Importantes
-
-- **Sem Persistência (Por Enquanto)**: Os tópicos são mantidos apenas em memória durante a sessão. Ao recarregar a página, apenas o Spring Framework estará disponível novamente.
-- **Limitação de API**: A geração de mapas mentais depende da chave de API do Google Gemini. Certifique-se de configurá-la corretamente.
-- **Performance**: A geração de mapas mentais leva alguns segundos dependendo da complexidade do tópico pesquisado.
+ 
