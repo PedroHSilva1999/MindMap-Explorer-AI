@@ -46,19 +46,19 @@ export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
                 <div className="inline-block p-4 bg-green-600/10 rounded-3xl mb-4 border border-green-500/20">
                     <Sparkles className="text-green-500 w-12 h-12" />
                 </div>
-                <h1 className="text-5xl font-black text-white tracking-tighter">
+                <h1 className="text-3xl md:text-5xl font-black text-white tracking-tighter">
                     <span className="text-green-500">MindMap</span> Explorer <span className="text-blue-400">AI</span>
                 </h1>
-                <p className="text-slate-400 text-lg">Gere mapas mentais dinâmicos para qualquer tecnologia com inteligência artificial</p>
+                <p className="text-slate-400 text-base md:text-lg px-4">Gere mapas mentais dinâmicos para qualquer tecnologia com inteligência artificial</p>
 
-                <form onSubmit={handleSubmit} className="relative group mt-8">
-                    <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-                        <Search className="text-slate-500 group-focus-within:text-green-500 transition-colors" size={24} />
+                <form onSubmit={handleSubmit} className="relative group mt-8 px-2 md:px-0">
+                    <div className="absolute inset-y-0 left-6 md:left-6 flex items-center pointer-events-none">
+                        <Search className="text-slate-500 group-focus-within:text-green-500 transition-colors" size={20} />
                     </div>
                     <input
                         type="text"
-                        className="w-full bg-slate-900 border-2 border-slate-800 rounded-full py-5 pl-16 pr-32 text-white text-xl outline-none focus:border-green-500/50 focus:ring-4 focus:ring-green-500/10 transition-all shadow-2xl"
-                        placeholder="O que você quer aprender hoje?"
+                        className="w-full bg-slate-900 border-2 border-slate-800 rounded-full py-4 md:py-5 pl-12 md:pl-16 pr-28 md:pr-32 text-base md:text-xl outline-none focus:border-green-500/50 focus:ring-4 focus:ring-green-500/10 transition-all shadow-2xl"
+                        placeholder="O que quer aprender?"
                         value={query}
                         onChange={(e) => setQuery(e.target.value)}
                         disabled={isSearching}
@@ -66,9 +66,9 @@ export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
                     <button
                         type="submit"
                         disabled={isSearching || !query.trim()}
-                        className="absolute right-3 top-3 bottom-3 px-8 bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white font-bold rounded-full transition-all flex items-center space-x-2 shadow-lg"
+                        className="absolute right-4 md:right-3 top-2 md:top-3 bottom-2 md:bottom-3 px-4 md:px-8 bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white font-bold rounded-full transition-all flex items-center space-x-2 shadow-lg text-sm md:text-base"
                     >
-                        {isSearching ? <span className="animate-pulse">Gerando...</span> : "Explorar"}
+                        {isSearching ? <span className="animate-pulse">...</span> : <span>Explorar</span>}
                     </button>
                 </form>
             </div>

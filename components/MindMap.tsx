@@ -53,11 +53,12 @@ export const MindMap: React.FC<Props> = ({ data, onNodeClick }) => {
 
       treeLayout(root);
 
-      // Centralização inicial automática melhorada
-      const initialScale = 0.75;
-      const initialX = 80;
+      const isMobile = width < 768;
+      const initialScale = isMobile ? 0.5 : 0.75;
+      const initialX = isMobile ? 20 : 80;
+      const initialY = isMobile ? height / 4 : 50;
 
-      svg.call(zoom.transform, d3.zoomIdentity.translate(initialX, 50).scale(initialScale));
+      svg.call(zoom.transform, d3.zoomIdentity.translate(initialX, initialY).scale(initialScale));
 
       const linkGenerator = d3.linkHorizontal<any, any>()
         .x(d => d.y)
@@ -105,11 +106,11 @@ export const MindMap: React.FC<Props> = ({ data, onNodeClick }) => {
 
       nodes.append("text")
         .attr("dy", ".35em")
-        .attr("x", d => (d.children ? -15 : 15))
+        .attr("x", d => (d.children ? (isMobile ? -8 : -15) : (isMobile ? 8 : 15)))
         .attr("text-anchor", d => (d.children ? "end" : "start"))
         .attr("class", "node-text")
         .attr("fill", "#ffffff")
-        .attr("font-size", "14px")
+        .attr("font-size", isMobile ? "11px" : "14px")
         .attr("font-weight", "500")
         .text(d => d.data.name)
         .style("text-shadow", "0 2px 6px rgba(0,0,0,0.9), 0 0 3px rgba(0,0,0,0.5)");

@@ -41,8 +41,8 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
 
   return (
     <div className="fixed right-0 top-0 h-full w-full md:w-[450px] bg-slate-900 border-l border-slate-700 shadow-2xl z-50 overflow-y-auto transform transition-transform duration-300 animate-in slide-in-from-right">
-      <div className="sticky top-0 bg-slate-900/90 backdrop-blur p-6 border-b border-slate-700 flex justify-between items-center z-10">
-        <h2 className="text-2xl font-bold text-teal-400 font-mono">{annotationName}</h2>
+      <div className="sticky top-0 bg-slate-900/95 backdrop-blur-md p-4 md:p-6 border-b border-slate-700 flex justify-between items-center z-10">
+        <h2 className="text-xl md:text-2xl font-bold text-teal-400 font-mono truncate">{annotationName}</h2>
         <button
           onClick={onClose}
           className="p-2 hover:bg-slate-800 rounded-full transition-colors"
@@ -51,7 +51,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
         </button>
       </div>
 
-      <div className="p-6 space-y-8">
+      <div className="p-4 md:p-6 space-y-6 md:space-y-8">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20 space-y-4">
             <Loader2 className="animate-spin text-teal-500" size={48} />

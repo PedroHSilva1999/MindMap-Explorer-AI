@@ -61,50 +61,57 @@ const App: React.FC = () => {
 
   return (
     <div className="flex flex-col h-screen w-full bg-slate-950 text-slate-200 overflow-hidden font-sans animate-in fade-in duration-500">
-      <header className="h-16 px-8 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-md z-20">
-        <div className="flex items-center space-x-4">
+      <header className="h-16 px-4 md:px-8 border-b border-slate-800 flex items-center justify-between bg-slate-900/50 backdrop-blur-md z-20">
+        <div className="flex items-center space-x-2 md:space-x-4">
           <button
             onClick={() => setActiveTopic(null)}
             className="p-2 hover:bg-slate-800 rounded-xl text-slate-400 hover:text-white transition-all flex items-center space-x-2"
           >
             <ArrowLeft size={20} />
-            <span className="text-sm font-medium hidden md:block">Voltar ao Início</span>
+            <span className="text-sm font-medium hidden md:block">Voltar</span>
           </button>
-          <div className="h-6 w-[1px] bg-slate-800" />
-          <div>
-            <h1 className="text-lg font-bold text-white flex items-center space-x-2">
-              <span className="text-green-500">{activeTopic.name}</span>
+          <div className="h-6 w-[1px] bg-slate-800 hidden md:block" />
+          <div className="max-w-[150px] md:max-w-none truncate">
+            <h1 className="text-sm md:text-lg font-bold text-white flex items-center space-x-2 truncate">
+              <span className="text-green-500 truncate">{activeTopic.name}</span>
             </h1>
-            <p className="text-[10px] text-slate-500 uppercase tracking-widest font-semibold">{activeTopic.category}</p>
+            <p className="text-[8px] md:text-[10px] text-slate-500 uppercase tracking-widest font-semibold truncate">{activeTopic.category}</p>
           </div>
         </div>
 
-        <div className="hidden md:flex items-center space-x-6">
+        <div className="flex items-center space-x-2 md:space-x-6">
           <button
             onClick={() => setActiveTopic(null)}
-            className="flex items-center space-x-2 text-sm bg-green-600/10 text-green-500 hover:bg-green-600/20 px-4 py-2 rounded-full border border-green-500/20 transition-all"
+            className="hidden sm:flex items-center space-x-2 text-sm bg-green-600/10 text-green-500 hover:bg-green-600/20 px-3 md:px-4 py-2 rounded-full border border-green-500/20 transition-all"
+            title="Nova Pesquisa"
           >
             <Sparkles size={16} />
-            <span className="font-bold uppercase tracking-wider text-[10px]">Nova Pesquisa</span>
+            <span className="font-bold uppercase tracking-wider text-[9px] md:text-[10px] hidden md:block">Nova Pesquisa</span>
           </button>
+
           <button
             onClick={() => setIsSearchOpen(true)}
-            className="flex items-center space-x-2 text-sm text-slate-400 hover:text-white transition-colors"
+            className="p-2 md:p-0 flex items-center md:space-x-2 text-sm text-slate-400 hover:text-white transition-colors"
+            title="Buscar no Mapa"
           >
-            <SearchIcon size={16} />
-            <span>Buscar no Mapa</span>
+            <SearchIcon size={20} className="md:w-4 md:h-4" />
+            <span className="hidden md:block">Buscar</span>
           </button>
+
           <button
             onClick={() => setIsGuideOpen(true)}
-            className="flex items-center space-x-2 text-sm text-slate-400 hover:text-white transition-colors"
+            className="p-2 md:p-0 flex items-center md:space-x-2 text-sm text-slate-400 hover:text-white transition-colors"
+            title="Ajuda"
           >
-            <Info size={16} />
-            <span>Guia</span>
+            <Info size={20} className="md:w-4 md:h-4" />
+            <span className="hidden md:block">Guia</span>
           </button>
-          <div className="h-6 w-[1px] bg-slate-800" />
-          <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-teal-500 to-green-500" />
-            <span className="text-sm font-medium">Desenvolvedor</span>
+
+          <div className="h-6 w-[1px] bg-slate-800 hidden sm:block" />
+
+          <div className="flex items-center space-x-2 md:space-x-3">
+            <div className="w-7 h-7 md:w-8 md:h-8 rounded-full bg-gradient-to-tr from-teal-500 to-green-500 shadow-lg shadow-green-500/20" />
+            <span className="text-xs md:text-sm font-medium hidden sm:block">Dev</span>
           </div>
         </div>
       </header>
