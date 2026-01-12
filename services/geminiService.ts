@@ -59,27 +59,11 @@ export async function generateMindMap(topic: string): Promise<AnnotationNode> {
   
   REGRAS CRÍTICAS:
   1. O nó raiz (root) deve ser "${topic}".
-  2. Crie de 3 a 5 categorias principais DIFERENTES (ex: Arquitetura, Instalação, Comandos, Segurança, etc).
-  3. Para cada categoria, crie de 2 a 4 sub-itens (folhas) com nomes específicos e técnicos.
+  2. Crie no MÍNIMO 4 categorias principais e no MÁXIMO 8 categorias (ex: Arquitetura, Core, Web, Segurança, Banco de Dados, Testes, Nuvem, etc).
+  3. Para cada categoria, crie de 3 a 6 sub-itens (folhas) com nomes técnicos e específicos.
   4. NÃO REPITA nomes de categorias ou itens.
-  5. Use cores hexadecimais variadas e vibrantes (Tailwind colors).
-  
-  A estrutura deve ser:
-  {
-    "name": "${topic}",
-    "type": "root",
-    "color": "#HEX",
-    "children": [
-      {
-        "name": "Nome da Categoria",
-        "type": "category",
-        "color": "#HEX",
-        "children": [
-          { "name": "Item Específico", "type": "annotation", "color": "#HEX" }
-        ]
-      }
-    ]
-  }`;
+  5. Use cores hexadecimais variadas, vibrantes e contrastantes (Tailwind colors like emerald, sky, amber, rose, violet).
+  6. Se o tópico for complexo, sinta-se à vontade para expandir para mais de 4 categorias.`;
 
   try {
     const response = await ai.models.generateContent({

@@ -64,7 +64,6 @@ export const SPRING_DATA: AnnotationNode = {
       type: "category",
       color: "#0369a1",
       children: [
-        { name: "@RestController", type: "annotation" },
         { name: "@RequestMapping", type: "annotation" },
         { name: "@PostMapping", type: "annotation" },
         { name: "@GetMapping", type: "annotation" },
@@ -74,6 +73,35 @@ export const SPRING_DATA: AnnotationNode = {
         { name: "@PathVariable", type: "annotation" },
         { name: "@RequestParam", type: "annotation" },
         { name: "@CrossOrigin", type: "annotation" },
+      ]
+    },
+    {
+      name: "Data",
+      type: "category",
+      color: "#7c3aed",
+      children: [
+        { name: "@Entity", type: "annotation" },
+        { name: "@Id", type: "annotation" },
+        { name: "@GeneratedValue", type: "annotation" },
+        { name: "@Table", type: "annotation" },
+        { name: "@Column", type: "annotation" },
+        { name: "@ManyToOne", type: "annotation" },
+        { name: "@OneToMany", type: "annotation" },
+        { name: "@JoinColumn", type: "annotation" },
+        { name: "@Transactional", type: "annotation" },
+        { name: "@Query", type: "annotation" },
+      ]
+    },
+    {
+      name: "Security",
+      type: "category",
+      color: "#be123c",
+      children: [
+        { name: "@EnableWebSecurity", type: "annotation" },
+        { name: "@EnableGlobalMethodSecurity", type: "annotation" },
+        { name: "@PreAuthorize", type: "annotation" },
+        { name: "@PostAuthorize", type: "annotation" },
+        { name: "@AuthenticationPrincipal", type: "annotation" },
       ]
     }
   ]
