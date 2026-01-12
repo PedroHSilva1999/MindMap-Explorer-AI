@@ -16,19 +16,64 @@ interface Props {
     onSearch: (query: string) => Promise<void>;
 }
 
+const validateQuery = (query: string): { valid: boolean; error?: string } => {
+    const trimmed = query.trim();
+
+    if (!trimmed) {
+        return { valid: false, error: 'Por favor, digite um termo para pesquisar' };
+    }
+
+    if (trimmed.length > 200) {
+        return { valid: false, error: 'O termo de pesquisa deve ter no máximo 200 caracteres' };
+    }
+
+    const dangerousPatterns = [
+        /ignore\s+previous\s+instructions/i,
+        /system\s*:/i,
+        /\[INST\]/i,
+        /<\|im_start\|>/i,
+    ];
+
+    for (const pattern of dangerousPatterns) {
+        if (pattern.test(trimmed)) {
+            return { valid: false, error: 'O termo de pesquisa contém caracteres inválidos' };
+        }
+    }
+
+    return { valid: true };
+};
+
 export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
     const [query, setQuery] = useState('');
     const [isSearching, setIsSearching] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [lastSearchTime, setLastSearchTime] = useState(0);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!query.trim()) return;
+
+        const validation = validateQuery(query);
+        if (!validation.valid) {
+            setError(validation.error || 'Erro na validação');
+            return;
+        }
+
+        const now = Date.now();
+        if (now - lastSearchTime < 2000) {
+            setError('Aguarde alguns segundos antes de pesquisar novamente');
+            return;
+        }
+
         setIsSearching(true);
+        setError(null);
+        setLastSearchTime(now);
+
         try {
-            await onSearch(query);
+            await onSearch(query.trim());
             setQuery('');
         } catch (error) {
-            console.error(error);
+            console.error('Erro na pesquisa:', error);
+            setError('Não foi possível gerar o mapa mental. Tente novamente.');
         } finally {
             setIsSearching(false);
         }
@@ -57,10 +102,14 @@ export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
                     </div>
                     <input
                         type="text"
+                        maxLength={200}
                         className="w-full bg-slate-900 border-2 border-slate-800 rounded-full py-4 md:py-5 pl-12 md:pl-16 pr-28 md:pr-32 text-base md:text-xl outline-none focus:border-green-500/50 focus:ring-4 focus:ring-green-500/10 transition-all shadow-2xl"
                         placeholder="O que quer aprender?"
                         value={query}
-                        onChange={(e) => setQuery(e.target.value)}
+                        onChange={(e) => {
+                            setQuery(e.target.value);
+                            setError(null);
+                        }}
                         disabled={isSearching}
                     />
                     <button
@@ -70,6 +119,11 @@ export const Home: React.FC<Props> = ({ topics, onSelectTopic, onSearch }) => {
                     >
                         {isSearching ? <span className="animate-pulse">...</span> : <span>Explorar</span>}
                     </button>
+                    {error && (
+                        <div className="mt-2 text-red-400 text-sm text-center px-4">
+                            {error}
+                        </div>
+                    )}
                 </form>
             </div>
 

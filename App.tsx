@@ -37,15 +37,17 @@ const App: React.FC = () => {
       const mindMapData = await generateMindMap(query);
       const newTopic: Topic = {
         id: Date.now().toString(),
-        name: query,
+        name: query.substring(0, 100),
         category: 'Pesquisas Recentes',
         data: mindMapData
       };
       setTopics(prev => [newTopic, ...prev]);
       setActiveTopic(newTopic);
     } catch (error) {
-      console.error("Erro ao pesquisar:", error);
-      alert("Não foi possível gerar o mapa mental para este termo.");
+      if (process.env.NODE_ENV === 'development') {
+        console.error("Erro ao pesquisar:", error);
+      }
+      throw new Error("Não foi possível gerar o mapa mental para este termo. Por favor, tente novamente.");
     }
   };
 

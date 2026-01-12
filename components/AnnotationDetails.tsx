@@ -4,6 +4,12 @@ import { AIAnnotationDetail } from '../types';
 import { fetchAnnotationDetails } from '../services/geminiService';
 import { Loader2, BookOpen, Code, Lightbulb, ChevronRight, X } from 'lucide-react';
 
+const escapeHtml = (text: string): string => {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+};
+
 interface Props {
   annotationName: string | null;
   onClose: () => void;
@@ -69,7 +75,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
                 <h3>Descrição</h3>
               </div>
               <p className="text-slate-300 leading-relaxed text-sm">
-                {data.summary}
+                {escapeHtml(data.summary)}
               </p>
             </section>
 
@@ -79,7 +85,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
                 <h3>Caso de Uso Principal</h3>
               </div>
               <p className="text-slate-300 leading-relaxed text-sm italic">
-                {data.useCase}
+                {escapeHtml(data.useCase)}
               </p>
             </section>
 
@@ -89,7 +95,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
                 <h3>Implementação do Código</h3>
               </div>
               <div className="bg-slate-950 rounded-lg p-4 font-mono text-xs overflow-x-auto border border-slate-800">
-                <pre className="text-green-400 whitespace-pre-wrap break-all leading-relaxed">{data.codeExample}</pre>
+                <pre className="text-green-400 whitespace-pre-wrap break-all leading-relaxed">{escapeHtml(data.codeExample)}</pre>
               </div>
             </section>
 
@@ -102,7 +108,7 @@ export const AnnotationDetails: React.FC<Props> = ({ annotationName, onClose }) 
                 {data.tips.map((tip, idx) => (
                   <li key={idx} className="flex items-start space-x-2 text-sm text-slate-400 bg-slate-800/50 p-3 rounded-md">
                     <span className="text-teal-500 font-bold">•</span>
-                    <span>{tip}</span>
+                    <span>{escapeHtml(tip)}</span>
                   </li>
                 ))}
               </ul>

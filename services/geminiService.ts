@@ -11,9 +11,23 @@ if (!apiKey) {
 const ai = new GoogleGenAI({ apiKey: apiKey || "" });
 const MODEL_NAME = "gemini-3-flash-preview";
 
+const sanitizeInput = (input: string): string => {
+  return input
+    .replace(/[<>]/g, '')
+    .replace(/ignore\s+previous\s+instructions/gi, '')
+    .replace(/system\s*:/gi, '')
+    .trim()
+    .substring(0, 200);
+};
+
 export async function fetchAnnotationDetails(name: string): Promise<AIAnnotationDetail> {
-  console.log(`[GeminiService] Buscando detalhes para: ${name}`);
-  const prompt = `Forneça informações técnicas detalhadas sobre o seguinte conceito, tecnologia ou anotação: "${name}".
+  const sanitizedName = sanitizeInput(name);
+
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[GeminiService] Buscando detalhes para: ${sanitizedName}`);
+  }
+
+  const prompt = `Forneça informações técnicas detalhadas sobre o seguinte conceito, tecnologia ou anotação: "${sanitizedName}".
   Responda obrigatoriamente em PORTUGUÊS (Brasil).
   
   Para o campo "codeExample", forneça um exemplo prático de código (Java, Bash, Dockerfile, etc, dependendo do contexto), com quebras de linha (\\n) e indentação correta, SEM usar blocos de markdown.
@@ -43,22 +57,36 @@ export async function fetchAnnotationDetails(name: string): Promise<AIAnnotation
     });
 
     const result = JSON.parse(response.text.trim());
-    console.log(`[GeminiService] Detalhes para ${name} obtidos com sucesso`);
+
+    if (!result.summary || !result.useCase || !result.codeExample || !Array.isArray(result.tips)) {
+      throw new Error('Resposta da API em formato inválido');
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`[GeminiService] Detalhes para ${sanitizedName} obtidos com sucesso`);
+    }
+
     return result;
   } catch (error) {
-    console.error(`[GeminiService] Erro ao buscar detalhes para ${name}:`, error);
-    throw error;
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`[GeminiService] Erro ao buscar detalhes:`, error);
+    }
+    throw new Error('Falha ao buscar detalhes. Por favor, tente novamente.');
   }
 }
 
 export async function generateMindMap(topic: string): Promise<AnnotationNode> {
-  console.log(`[GeminiService] Gerando mapa mental para: ${topic}`);
+  const sanitizedTopic = sanitizeInput(topic);
 
-  const prompt = `Gere uma estrutura de mapa mental em formato JSON para a tecnologia ou conceito: "${topic}".
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[GeminiService] Gerando mapa mental para: ${sanitizedTopic}`);
+  }
+
+  const prompt = `Gere uma estrutura de mapa mental em formato JSON para a tecnologia ou conceito: "${sanitizedTopic}".
   Responda obrigatoriamente em PORTUGUÊS (Brasil).
   
   REGRAS CRÍTICAS:
-  1. O nó raiz (root) deve ser "${topic}".
+  1. O nó raiz (root) deve ser "${sanitizedTopic}".
   2. Crie no MÍNIMO 4 categorias principais e no MÁXIMO 8 categorias (ex: Arquitetura, Core, Web, Segurança, Banco de Dados, Testes, Nuvem, etc).
   3. Para cada categoria, crie de 3 a 6 sub-itens (folhas) com nomes técnicos e específicos.
   4. NÃO REPITA nomes de categorias ou itens.
@@ -108,13 +136,26 @@ export async function generateMindMap(topic: string): Promise<AnnotationNode> {
     });
 
     const text = response.text.trim();
-    console.log("[GeminiService] Resposta bruta recebida:", text);
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log("[GeminiService] Resposta recebida");
+    }
 
     const parsed = JSON.parse(text);
-    console.log("[GeminiService] JSON parseado com sucesso");
+
+    if (!parsed.name || !parsed.type || !parsed.color || !Array.isArray(parsed.children)) {
+      throw new Error('Resposta da API em formato inválido');
+    }
+
+    if (process.env.NODE_ENV === 'development') {
+      console.log("[GeminiService] JSON parseado com sucesso");
+    }
+
     return parsed;
   } catch (error) {
-    console.error("[GeminiService] Erro ao gerar ou parsear mapa mental:", error);
-    throw error;
+    if (process.env.NODE_ENV === 'development') {
+      console.error("[GeminiService] Erro ao gerar mapa mental:", error);
+    }
+    throw new Error('Falha ao gerar mapa mental. Por favor, tente novamente.');
   }
 }
